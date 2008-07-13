@@ -4,7 +4,7 @@ process_list *current_process;
 process_list *first_process; //this process is always the idle process
 
 thread_list *current_thread;
-
+/*
 
 int init_TaskMan(){
 	first_process=malloc(sizeof(process_list); //our idle process
@@ -42,7 +42,7 @@ int init_TaskMan(){
 void IdleProcess(){
 	for(;;){}
 }
-
+*/
 
 
 
