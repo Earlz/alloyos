@@ -1,4 +1,6 @@
 #include <base_dev/timer.h>
+#include <taskman.h>
+
 
 volatile uint32_t timer_ticks=0;
 
@@ -37,6 +39,10 @@ void timer_Irq0Handler(struct InterruptInfo *r){
 	}
 	if(timer2==75){
 		kd_putc_xy('\\',79,24);
+	}
+	
+	if(multitasking==1){
+		ScheduleTasks();
 	}
 	
 	

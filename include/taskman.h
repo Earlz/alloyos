@@ -8,6 +8,7 @@ typedef struct{
 	struct InterruptInfo *context; //CPU state
 							//NOTE!! the address of this should be reloaded as the ESP
 	uint32_t PID; //owner process
+	uint32_t stack_size;
 	uint32_t attributes;
 	uint8_t priority;
 }thread;
@@ -36,6 +37,7 @@ typedef struct{
 	void *next;
 }process_list;
 
+extern volatile int multitasking;
 
 //process attributes
 #define KERNEL_PROCESS 1
@@ -54,7 +56,9 @@ typedef struct{
 #define PRIORITY_REALTIME 0xFF
 
 
-
+void IdleProcess();
+void KernelProcessEntry();
+void ScheduleTasks();
 
 
 
