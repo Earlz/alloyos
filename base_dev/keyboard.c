@@ -159,6 +159,7 @@ int kbd_PutBuffer(uint16_t scan,uint8_t asci){
 kbd_key kbd_PopBuffer(){
 	kbd_key k;
 	while(current_key==0){
+		hlt();
 	//fill in busy code here	
 	}
 	stopints();
@@ -241,6 +242,7 @@ int kbd_DoUnshifts(uint8_t scan){
 
 
 void kbd_Irq1Handler(struct InterruptInfo *r){
+	stopints();
 	uint8_t tmp;
 	tmp=kbd_GetScanCode();
 	if(tmp>=0x80){ 
@@ -251,13 +253,14 @@ void kbd_Irq1Handler(struct InterruptInfo *r){
 		if(kbd_DoShifts(tmp)==0){ //if not a shift-type key
 			
 			if ((kbd_shifts.caps^kbd_shifts.shift)==1) {
-				//kd_putc_xy(kbdus_caps[tmp],11,12);
+				kd_putc_xy(kbdus_caps[tmp],11,12);
 				kbd_PutBuffer(tmp,kbdus_caps[tmp]);
 			}else{
-				//kd_putc_xy(kbdus[tmp],10,12);
+				kd_putc_xy(kbdus[tmp],10,12);
 				kbd_PutBuffer(tmp,kbdus[tmp]);
 			}
 		}
+		startints();
 	}
 	
 	

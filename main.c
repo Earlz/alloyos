@@ -47,6 +47,7 @@ void *space[5];
 
 void kmain( void* mbd, unsigned int magic ){	
 	uint32_t i;
+	char k;
 	stopints();
 	kd_cls();
 	kd_puts_xy("Codename: The Alloy Project",0,0);
@@ -63,7 +64,14 @@ void kmain( void* mbd, unsigned int magic ){
 	
 	kd_putc_xy('~',4,4);
 	kd_putc_xy('!',5,5);
-	for(;;){}
+	for(;;){
+	k=kd_getc_noecho();
+	kd_putc_xy(k,10,4);
+	if(k=='a'){
+		k=k/0;
+	}
+	
+	}
 }
 
 

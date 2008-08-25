@@ -44,6 +44,7 @@ void kd_puts_xy(char *str,uint8_t x,uint8_t y);
 void kd_cls();
 void kd_set_color(uint8_t color);
 
+char kd_getc_noecho();
 
 
 

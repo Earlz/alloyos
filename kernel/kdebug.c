@@ -75,7 +75,9 @@ void kd_waitkey(){
 	kbd_GetKey();
 }
 
-
+char kd_getc_noecho(){
+	return kbd_GetKey();
+}
 
 
 
