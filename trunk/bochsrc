@@ -53,7 +53,7 @@
 #display_library: nogui
 #display_library: rfb
 #display_library: sdl
-#display_library: term
+display_library: term
 #display_library: win32
 #display_library: wx
 #display_library: x

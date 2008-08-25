@@ -1,3 +1,37 @@
+/*
+<Copyright Header>
+Copyright (c) 2007 - 2008 Jordan "Earlz/hckr83" Earls  <http://www.Earlz.biz.tm>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. The name of the author may not be used to endorse or promote products
+   derived from this software without specific prior written permission.
+   
+THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES,
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
+THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+This file is part of the AlloyOS project
+</Copyright Header>
+*/
+
+/**Task management kernel functions -- Ring 0*/
+
 #include <taskman.h>
 #include <stdlib.h>
 process_list *current_process;
@@ -101,7 +135,27 @@ void KernelProcessEntry(){
 	for(;;){}
 }
 
+uint8_t create_thread_lock=0;
 
+thread *CreateThread(uint32_t pid,uint8_t priority,uint32_t stack_size,uint16_t data_seg,uint16_t code_seg, uint32_t eip){
+	//stopints(); //make sure we don't get interrupted...
+	while((volatile)create_thread_lock==1){}
+	create_thread_lock=1; //lock other cpus out
+	process *p=(process *)pid;
+	thread_list *t;
+	if(p->thread_count==0){
+		t.next=&t;
+	}else{
+		t.next=&p->threads;
+	}
+	t->thread_node.PID=pid;
+	t->thread_node.priority=priority;
+	t->thread_node.stack_size=stack_size;
+	t->thread_node.context.ds=data_seg;
+	
+	
+	
+}
 
 
 void ScheduleTasks(){
