@@ -53,7 +53,7 @@
 #display_library: nogui
 #display_library: rfb
 #display_library: sdl
-display_library: term
+#display_library: term
 #display_library: win32
 #display_library: wx
 #display_library: x
@@ -256,6 +256,7 @@ boot: floppy
 #
 #=======================================================================
 ips: 1000000
+#AlloyOS does not function properly if ips< 1Mips
 
 #=======================================================================
 # CLOCK:
@@ -446,7 +447,7 @@ parport1: enabled=1, file="parport.out"
 # Examples:
 #   vga_update_interval: 250000
 #=======================================================================
-vga_update_interval: 300000
+vga_update_interval: 200000
 
 # using for Winstone '98 tests
 #vga_update_interval:  100000
@@ -458,7 +459,7 @@ vga_update_interval: 300000
 # Examples:
 #   keyboard_serial_delay: 200
 #=======================================================================
-keyboard_serial_delay: 250
+keyboard_serial_delay: 350
 
 #=======================================================================
 # KEYBOARD_PASTE_DELAY:
