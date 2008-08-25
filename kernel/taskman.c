@@ -136,7 +136,7 @@ void KernelProcessEntry(){
 }
 
 uint8_t create_thread_lock=0;
-
+/*
 thread *CreateThread(uint32_t pid,uint8_t priority,uint32_t stack_size,uint16_t data_seg,uint16_t code_seg, uint32_t eip){
 	//stopints(); //make sure we don't get interrupted...
 	while((volatile)create_thread_lock==1){}
@@ -156,7 +156,7 @@ thread *CreateThread(uint32_t pid,uint8_t priority,uint32_t stack_size,uint16_t 
 	
 	
 }
-
+*/
 
 void ScheduleTasks(){
 	
